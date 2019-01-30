@@ -1,14 +1,17 @@
+package game;
+
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
-public class SnakesAndLadders {
+public class Board {
 
 	final static int WIN_CONDITION = 100;
 
 	Map<Integer, Integer> snakes = new HashMap<>();
 	Map<Integer, Integer> ladders = new HashMap<>();
 	
-	public SnakesAndLadders() {
+	public Board() {
 		snakes.put(99, 7);
 		snakes.put(92, 35);
 		snakes.put(78, 39);
@@ -24,10 +27,8 @@ public class SnakesAndLadders {
 		ladders.put(70, 89);
 		ladders.put(79, 81);
 	}
-}
-
-class RunGame {
-	public static void main(String[] args) {
-
+	
+	int rollDice() {
+		return new Random().nextInt(6)+1;		
 	}
 }
