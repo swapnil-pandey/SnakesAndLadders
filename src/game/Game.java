@@ -1,3 +1,6 @@
+/**
+ * Class for the game
+ */
 package game;
 
 import java.io.BufferedReader;
@@ -13,6 +16,12 @@ public class Game {
 
 	static Board board = new Board();
 
+	/**
+	 * To prompt the player to roll a dice by pressing 'r'. The player will be asked
+	 * again and again till the key 'r' is pressed.
+	 * 
+	 * @param player Id
+	 */
 	private int rollDicePrompt(int playerId) {
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -32,7 +41,15 @@ public class Game {
 		}
 	}
 
-	private List<Player> decideTurns(int numPlayers) {
+	/**
+	 * To decide the turns of players. First, all players roll the die and the
+	 * highest scorer will start the game first and the game continues in the
+	 * descending order of the die score.
+	 * 
+	 * @param number of players
+	 * @return list of players with proper play order
+	 */
+	public List<Player> decideTurns(int numPlayers) {
 		List<Player> players = new ArrayList<Player>();
 		List<ArrayList<Integer>> turnDecide = new ArrayList<ArrayList<Integer>>();
 
@@ -48,20 +65,21 @@ public class Game {
 			}
 		});
 		for (ArrayList<Integer> turn : turnDecide) {
-			System.out.println(turn);
+//			System.out.println(turn);
 			players.add(new Player(turn.get(0)));
 		}
 		return players;
 
 	}
 
-	public static void main(String[] args) {
-		Game game = new Game();
-		game.startGame();
-	}
-
+	/**
+	 * Simulate the rolling of dice turn by turn and then arriving on the final
+	 * destination accordingly.
+	 * 
+	 * @param List of players playing the game
+	 */
 	private void play(List<Player> players) {
-		System.out.println(players);
+//		System.out.println(players);
 		boolean won = false;
 		while (!won) {
 			for (int i = 0; i < players.size(); i++) {
@@ -77,13 +95,19 @@ public class Game {
 		}
 	}
 
-	private int playerPosition(Player player, int roll) {
+	/**
+	 * To calculate the position of the player after a dice roll.
+	 * 
+	 * @param Player rolling the dice
+	 * @param The number obtained on the dice
+	 * @return the final position of the player
+	 */
+	public int playerPosition(Player player, int roll) {
 		int position = player.getCurrPos() + roll;
 
 		if (position > board.WIN_CONDITION)
 			return player.getCurrPos();
 
-		// TODO check = condition
 		else if (board.getSnakes().containsKey(position) == true) {
 			System.out.println("Swallowed by snake :( ");
 			return board.getSnakes().get(position);
@@ -97,6 +121,9 @@ public class Game {
 		return position;
 	}
 
+	/**
+	 * To start the game of snakes and ladders
+	 */
 	private void startGame() {
 		int numPlayers;
 
@@ -112,8 +139,14 @@ public class Game {
 			}
 		}
 		List<Player> players = decideTurns(numPlayers);
+		System.out.println("\nPlayer "+players.get(0).getId()+" goes first");
 		play(players);
 
+	}
+
+	public static void main(String[] args) {
+		Game game = new Game();
+		game.startGame();
 	}
 
 }

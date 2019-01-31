@@ -1,15 +1,17 @@
+/**
+ * Class for the player
+ */
 package game;
 
 public class Player {
 	private int currPos;
 	private int id;
 
-	@Override
-	public String toString() {
-		return "Player [currPos=" + currPos + ", id=" + id + "]";
-	}
-
-	Player(int id) {
+	/**
+	 * To initialize a new player
+	 * @param player id
+	 */
+	public Player(int id) {
 		this.id = id;
 		this.currPos = 0;
 	}
