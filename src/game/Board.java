@@ -6,11 +6,19 @@ import java.util.Random;
 
 public class Board {
 
-	final static int WIN_CONDITION = 100;
+	final int WIN_CONDITION = 100;
 
-	Map<Integer, Integer> snakes = new HashMap<>();
-	Map<Integer, Integer> ladders = new HashMap<>();
+	private Map<Integer, Integer> snakes = new HashMap<>();
+	private Map<Integer, Integer> ladders = new HashMap<>();
 	
+	public Map<Integer, Integer> getSnakes() {
+		return snakes;
+	}
+
+	public Map<Integer, Integer> getLadders() {
+		return ladders;
+	}
+
 	public Board() {
 		snakes.put(99, 7);
 		snakes.put(92, 35);
